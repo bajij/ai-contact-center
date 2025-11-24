@@ -1,0 +1,64 @@
+// frSchemaPrismaPrincipalPourApplication
+// enMainPrismaSchemaForApplication
+
+generator client {
+  // frGenerationClientPrismaTypescript
+  // enGeneratePrismaClientForTypescript
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // frUtilisationBaseSqlitePourDevLocal
+  // enUseSqliteDatabaseForLocalDev
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// frModeleAssistantConfigurationGlobaleIa
+// enAssistantModelGlobalIaConfiguration
+model Assistant {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  language     String   @default("fr")
+  tone         String   @default("neutre")
+  instructions String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // frQuestionsFaqLieesAAssistant
+  // enFaqQuestionsLinkedToAssistant
+  faqItems     FaqItem[]
+  widgetConfig WidgetConfig?
+}
+
+// frModeleFaqItemQuestionReponse
+// enFaqItemQuestionAnswerModel
+model FaqItem {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // frLienVersAssistantAssocie
+  // enLinkToAssociatedAssistant
+  assistant   Assistant @relation(fields: [assistantId], references: [id])
+  assistantId String
+}
+
+// frModeleConfigurationWidgetChat
+// enChatWidgetConfigurationModel
+model WidgetConfig {
+  id              String    @id @default(cuid())
+  buttonText      String    @default("Besoin d'aide ?")
+  primaryColor    String    @default("#10b981")
+  backgroundColor String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // frRelationUnPourUnAvecAssistant
+  // enOneToOneRelationWithAssistant
+  assistant   Assistant @relation(fields: [assistantId], references: [id])
+  assistantId String    @unique
+}

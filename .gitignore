@@ -39,3 +39,23 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma
+
+# --- Environnements & secrets ---
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# --- Prisma / bases locales ---
+prisma/dev.db
+dev.db
+*.sqlite
+*.db
+
+# --- OS / éditeur ---
+.DS_Store
+Thumbs.db
+.vscode
