@@ -108,5 +108,4 @@ npx prisma migrate dev --name init
 # ou, si les migrations existent déjà :
 # npx prisma migrate dev
 npm run dev
-<img width="2555" height="1210" alt="image" src="https://github.com/user-attachments/assets/a4edff85-1500-46a4-96ea-dcbc56fed914" />
 
